@@ -16,7 +16,6 @@ use App\Http\Controllers\LoginController;
 */
 
 Route::post('/users/login', [LoginController::class, 'store']);
+Route::post('/users/logout', [LoginController::class, 'destroy']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:sanctum')->get('/user', [LoginController::class, 'show']);

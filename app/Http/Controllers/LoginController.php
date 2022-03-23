@@ -31,6 +31,29 @@ class LoginController extends Controller
         	}
 
         	return response()->json($response, $status);
-    	}
+	}
 
+	public function destroy(Request $request){
+		
+		$request->user()->tokens()->where('tokenable_id', 1)->delete();
+
+		$status = 401;
+		$response = [
+			'error'=>'gagal',
+		];
+
+		if(Auth::Logout()){
+			$status = 200;
+
+			$response = [
+				'O.K'=>'Log Out',
+			];
+		}
+
+        	return response()->json($response, $status);
+	}
+
+	public function show(Request $request){
+		return $request->user();
+	}
 }
