@@ -28,21 +28,24 @@ class LoginController extends Controller
                 		'access_token' => $token,
                 		'token_type' => 'Bearer',
             			];
-        	}
+		}
+
+		//$request->user()->createToken('access_token')->plainTextToken;
+		//$request->session()->regenerate();	
 
         	return response()->json($response, $status);
 	}
 
 	public function destroy(Request $request){
 		
-		$request->user()->tokens()->where('tokenable_id', 1)->delete();
+		$request->user()->tokens()->where('tokenable_id', Auth::user()->id)->delete();
 
 		$status = 401;
 		$response = [
 			'error'=>'gagal',
 		];
 
-		if(Auth::Logout()){
+		if(Auth::check()){
 			$status = 200;
 
 			$response = [
