@@ -1,4 +1,4 @@
-# Simple App Aplik
+# Simple App for Laravel API with Token API
 
 ## use sanctum for token API
 - set model hasapitokens
